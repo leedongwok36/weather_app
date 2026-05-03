@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; // Thư viện để format giờ (nhớ thêm intl vào pubspec.yaml)
+import 'package:intl/intl.dart';
 import '../services/weather_service.dart';
 import '../widgets/weather_card.dart';
 import '../logic/shared_nav_bar.dart';
@@ -30,7 +30,6 @@ class _HomeScreenState extends State<HomeScreen> {
       'https://openweathermap.org/img/wn/$iconCode@2x.png',
       width: size,
       height: size,
-      // Nếu lỗi tải ảnh thì hiện icon mặc định
       errorBuilder: (context, error, stackTrace) =>
           Icon(Icons.cloud, size: size, color: Colors.white),
     );
@@ -44,7 +43,6 @@ class _HomeScreenState extends State<HomeScreen> {
         position.longitude,
       );
 
-      // Gọi song song 2 API cho nhanh
       final results = await Future.wait([
         _weatherService.getCurrentWeather(
           position.latitude,
@@ -80,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  // Hàm helper để parse giờ từ timestamp của API
+
   String _formatTime(int timestamp) {
     DateTime date = DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
     return DateFormat('HH:mm').format(date); // Output VD: "15:00"
@@ -116,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
 
                       const SizedBox(height: 10),
-                      // KHỐI NHIỆT ĐỘ & ICON: Icon nằm chếch bên phải phía trên
+                     
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment:
@@ -139,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: _getWeatherIcon(
                               _currentWeather?['weather'][0]['icon'],
                               size: 60,
-                            ), // Icon động từ API
+                            ), 
                           ),
                         ],
                       ),
@@ -164,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
 
-                      // CHẤT LƯỢNG KHÔNG KHÍ (Giữ nguyên như hình)
+                     
                       Padding(
                         padding: const EdgeInsets.all(20),
                         child: Container(
@@ -229,7 +227,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
 
-                      // DỰ BÁO THEO GIỜ (Giống hệt khoảng cách trong ảnh)
+                   
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Row(
@@ -254,7 +252,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(height: 15),
                       SizedBox(
                         height:
-                            160, // Tăng chiều cao để các thẻ dài ra giống ảnh
+                            160,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           padding: const EdgeInsets.only(left: 20),
@@ -271,10 +269,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             }
 
                             return Container(
-                              width: 100, // Chiều rộng thẻ
+                              width: 100,
                               margin: const EdgeInsets.only(
                                 right: 12,
-                              ), // Nới rộng khoảng cách giữa các khối (Yêu cầu của bạn)
+                              ), 
                               padding: const EdgeInsets.symmetric(vertical: 20),
                               decoration: BoxDecoration(
                                 color: isNow
@@ -282,7 +280,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     : const Color(0xFF3E4364).withOpacity(0.3),
                                 borderRadius: BorderRadius.circular(
                                   30,
-                                ), // Bo góc sâu như hình (pill shape)
+                                ), 
                                 border: Border.all(
                                   color: Colors.white.withOpacity(0.1),
                                 ),
@@ -315,7 +313,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       color: Colors.white,
                                     ),
                                   ),
-                                  // HIỂN THỊ ICON THAY ĐỔI THEO THỜI TIẾT
+                                  
                                   _getWeatherIcon(
                                     hourData['weather'][0]['icon'],
                                     size: 40,
@@ -335,7 +333,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
 
-                      // 4 CỘT THÔNG SỐ Ở DƯỚI
+                      
                       Padding(
                         padding: const EdgeInsets.all(20),
                         child: GridView.count(
