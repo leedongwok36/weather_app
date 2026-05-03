@@ -23,10 +23,10 @@ class MyApp extends StatelessWidget {
       title: 'Weather App',
       theme: ThemeData(
         brightness: Brightness.dark,
-        fontFamily: 'SanFrancisco', // Có thể đổi font chữ của bạn ở đây
+        fontFamily: 'SanFrancisco',
         scaffoldBackgroundColor: const Color(
           0xFF2E335A,
-        ), // Màu nền xanh tím trầm
+        ), 
       ),
       home: const MainWrapper(),
     );
