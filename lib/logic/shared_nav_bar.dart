@@ -5,13 +5,13 @@ class SharedNavBar extends StatelessWidget {
   const SharedNavBar({super.key, required this.currentIndex});
 
   void _onItemTapped(BuildContext context, int index) {
-    if (index == currentIndex) return; // Nếu đang ở trang đó rồi thì không làm gì
+    if (index == currentIndex) return; 
 
     String routeName = '/home';
     if (index == 1) routeName = '/map';
     if (index == 2) routeName = '/cities';
 
-    // Dùng pushReplacementNamed để thay thế trang hiện tại, tránh tràn bộ nhớ
+  
     Navigator.pushReplacementNamed(context, routeName);
   }
 
