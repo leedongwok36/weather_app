@@ -4,7 +4,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:http/http.dart' as http;
 
 class WeatherService {
-  static const String apiKey = '434d9d5e3c9d31058b57e29ce7475d25'; // ĐIỀN API KEY CỦA BẠN VÀO ĐÂY
+  static const String apiKey = 'api'; // ĐIỀN API KEY CỦA BẠN VÀO ĐÂY
 
   // Hàm lấy vị trí hiện tại
   // Lấy vị trí GPS

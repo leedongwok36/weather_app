@@ -7,7 +7,7 @@ import 'screens/navigation_helper.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   MapboxOptions.setAccessToken(
-    "pk.eyJ1IjoibGVxdXlkb24iLCJhIjoiY21vaDZsMXE1MDBjdjJyc2YxYm04Mm43OSJ9.sKcB-1zueCcn6v6gpK9STw",
+    "dán token của mapbox",
   );
   runApp(const MyApp());
 }
