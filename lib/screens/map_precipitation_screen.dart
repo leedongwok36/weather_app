@@ -37,7 +37,7 @@ class _MapPrecipitationScreenState extends State<MapPrecipitationScreen> {
     );
   }
 
-  // Khi bản đồ khởi tạo xong
+  
  Future<void> _onMapCreated(MapboxMap mapboxMap) async  {
     if (_isMapInitialized) return;
     //_mapboxMap = mapboxMap;
@@ -49,7 +49,7 @@ class _MapPrecipitationScreenState extends State<MapPrecipitationScreen> {
     _startPrecipitationRadar();
   }
 
-  // --- Logic Radar Mapbox ---
+
  Future<void> _startPrecipitationRadar() async {
   if (!_isMapInitialized || _radarManager == null || _isRadarStarting) return;
 
@@ -87,7 +87,7 @@ Future<void> _startWindRadar() async {
 
   @override
   Widget build(BuildContext context) {
-    // 1. Tối ưu dữ liệu thực tế (Lượng mưa, Gió, Độ ẩm)
+
     final rain = widget.weatherData?['rain']?['1h'] ?? 0.0;
     final rainAccum24h = (rain * 2.1).toStringAsFixed(1); // Giả lập acumul 24h
     final wind = widget.weatherData?['wind']?['speed'] ?? 0.0;
@@ -96,7 +96,7 @@ Future<void> _startWindRadar() async {
     final rainChance = (rain * 100).toInt().clamp(
       0,
       100,
-    ); // Giả lập tỷ lệ mưa dựa trên lượng mưa
+    );
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -119,7 +119,7 @@ Future<void> _startWindRadar() async {
       ),
       body: Stack(
         children: [
-          // BẢN ĐỒ MAPBOX CÓ RADA
+         
           RepaintBoundary(
             child: MapWidget(
               key: const ValueKey("mapWidget"),
@@ -130,7 +130,7 @@ Future<void> _startWindRadar() async {
             ),
           ),
 
-          // PHẦN UI - CÁC GLASS CARD GIỐNG HỆT HÌNH
+         
           SafeArea(
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -138,12 +138,12 @@ Future<void> _startWindRadar() async {
                 children: [
                   const SizedBox(height: 50),
 
-                  // GLASS CARD CHÍNH: LƯỢNG MƯA & GIÓ (Có Tab nhấn được)
+                 
                   _buildPrecipitationWindCard(temp, rain, wind),
 
                   const SizedBox(height: 20),
 
-                  // CỘT CHÍNH (Layout giống hình bạn gửi)
+                 
                   if (_selectedRadarMode == RadarMode.precipitation)
                     _buildPrecipitationColumns(
                       rainChance,
@@ -163,7 +163,7 @@ Future<void> _startWindRadar() async {
 
                   const SizedBox(height: 20),
 
-                  // PRECIPITATION TIMELINE (Dữ liệu thực tế)
+                
                   _buildPrecipitationTimeline(rain),
 
                   const SizedBox(height: 120), // Khoảng trống BottomNav
@@ -176,15 +176,13 @@ Future<void> _startWindRadar() async {
     );
   }
 
-  // --- WIDGET BUILDERS ---
-
-  // Glass Card lớn ở trên cùng, có Tab "Precipitation" và "Wind" (Hiệu ứng khi nhấn)
+ 
   Widget _buildPrecipitationWindCard(int temp, double rain, double wind) {
     return GlassCard(
       width: double.infinity,
       child: Column(
         children: [
-          // Phần Tab (Nơi xử lý nhấn để hiện Radar Mapbox)
+        
           Row(
             children: [
               _buildRadarTab(
@@ -194,7 +192,7 @@ Future<void> _startWindRadar() async {
                 isSelected: _selectedRadarMode == RadarMode.precipitation,
                 onTap: () {
                   setState(() => _selectedRadarMode = RadarMode.precipitation);
-                  _startPrecipitationRadar(); // Gọi logic Radar Lượng mưa Mapbox
+                  _startPrecipitationRadar(); 
                 },
               ),
               _buildRadarTab(
@@ -204,13 +202,13 @@ Future<void> _startWindRadar() async {
                 isSelected: _selectedRadarMode == RadarMode.wind,
                 onTap: () {
                   setState(() => _selectedRadarMode = RadarMode.wind);
-                  _startWindRadar(); // Gọi logic Radar Gió Mapbox
+                  _startWindRadar();
                 },
               ),
             ],
           ),
 
-          // Phần nhiệt độ thực tế của Card
+        
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20),
             child: Column(
@@ -258,7 +256,7 @@ Future<void> _startWindRadar() async {
     );
   }
 
-  // Widget con cho Tab trong Glass Card chính (Có hiệu ứng mờ trắng khi chọn)
+  
   Widget _buildRadarTab({
     required IconData icon,
     required String title,
@@ -272,7 +270,7 @@ Future<void> _startWindRadar() async {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 15),
           decoration: BoxDecoration(
-            // Hiệu ứng mờ trắng như bạn yêu cầu ở ảnh cũ
+            
             color: isSelected
                 ? Colors.white.withOpacity(0.1)
                 : Colors.transparent,
@@ -315,7 +313,7 @@ Future<void> _startWindRadar() async {
     );
   }
 
-  // LƯỚI 4 CỘT DỮ LIỆU GIỐNG HỆT HÌNH
+  
   Widget _buildPrecipitationColumns(
     int chanceOfRain,
     double intensityVal,
@@ -363,7 +361,7 @@ Future<void> _startWindRadar() async {
     );
   }
 
-  // Widget con cho 4 thẻ cột dữ liệu (Có ProgressBar và SegmentedBar)
+
   Widget _buildStatColCard(
     IconData icon,
     String title,
@@ -402,7 +400,7 @@ Future<void> _startWindRadar() async {
               ),
             ),
 
-            // Thanh Progress chuẩn hình (từ 0.0 đến 1.0)
+           
             if (progressBarVal != null)
               LinearProgressIndicator(
                 value: progressBarVal,
@@ -411,7 +409,7 @@ Future<void> _startWindRadar() async {
                 minHeight: 4,
               ),
 
-            // Thanh Segmented chuẩn hình (từ 0 đến 3)
+         
             if (segmentedBarVal != null) _buildSegmentedBar(segmentedBarVal),
 
             if (subText != null)
@@ -425,7 +423,7 @@ Future<void> _startWindRadar() async {
     );
   }
 
-  // Segmented Bar cho Độ ẩm chuẩn hình ảnh
+ 
   Widget _buildSegmentedBar(int filledSegments) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -445,7 +443,7 @@ Future<void> _startWindRadar() async {
     );
   }
 
-  // PRECIPITATION TIMELINE (Dữ liệu thực tế, chuẩn bố cục hình)
+  
   Widget _buildPrecipitationTimeline(double rainVal) {
     return GlassCard(
       width: double.infinity,
@@ -472,7 +470,7 @@ Future<void> _startWindRadar() async {
     );
   }
 
-  // Widget con cho Timeline Item (Có Bar ProgressBar chuẩn hình)
+
   Widget _buildTimelineItem(String time, double rainVal) {
     return Row(
       children: [
@@ -491,9 +489,9 @@ Future<void> _startWindRadar() async {
               value: rainVal.clamp(0, 1) / 1, // Dữ liệu thực tế cho Bar
               backgroundColor: Colors.white.withOpacity(
                 0.05,
-              ), // Màu nền chuẩn bố cục
-              color: const Color(0xFF6A6A92), // Màu Progress chuẩn hình
-              borderRadius: BorderRadius.circular(8), // Bo góc giống hình
+              ), 
+              color: const Color(0xFF6A6A92), 
+              borderRadius: BorderRadius.circular(8), 
             ),
           ),
         ),
