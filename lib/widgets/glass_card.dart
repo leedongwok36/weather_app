@@ -18,17 +18,17 @@ class GlassCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(25), // Độ bo góc như hình
+      borderRadius: BorderRadius.circular(25), 
       child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10), // Độ mờ của kính
+        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10), 
         child: Container(
           width: width,
           height: height,
           padding: padding,
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.15), // Nền trắng trong suốt
+            color: Colors.white.withOpacity(0.15), 
             borderRadius: BorderRadius.circular(25),
-            border: Border.all(color: Colors.white.withOpacity(0.3), width: 1.5), // Viền sáng
+            border: Border.all(color: Colors.white.withOpacity(0.3), width: 1.5), 
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
