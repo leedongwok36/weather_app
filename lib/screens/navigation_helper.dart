@@ -16,18 +16,18 @@ class _MainWrapperState extends State<MainWrapper> {
   final List<Widget> _screens = [
     const HomeScreen(),
     const MapScreen(),
-    const Center(child: Text("Widgets Screen")), // Tạm thời
+    const Center(child: Text("Widgets Screen")), 
     const CitiesScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Để body tràn xuống dưới thanh Nav cho đẹp
+     
       extendBody: true,
       body: IndexedStack(
       index: _selectedIndex,
-      children: _screens, // Các trang sẽ được load sẵn và nằm chờ
+      children: _screens, 
     ),
     bottomNavigationBar: _buildBottomNav(),
     );
@@ -37,7 +37,7 @@ class _MainWrapperState extends State<MainWrapper> {
     return Container(
       height: 100,
       decoration: const BoxDecoration(
-        color: Color(0xFF1C1B33), // Màu tím đen của Nav
+        color: Color(0xFF1C1B33), 
         borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
       ),
       child: Row(
@@ -61,7 +61,7 @@ class _MainWrapperState extends State<MainWrapper> {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         decoration: isSelected
             ? BoxDecoration(
-                color: Colors.white.withOpacity(0.15), // Khung mờ bao quanh nút
+                color: Colors.white.withOpacity(0.15),
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: Colors.white24, width: 0.5),
               )
