@@ -4,10 +4,9 @@ import 'package:geocoding/geocoding.dart';
 import 'package:http/http.dart' as http;
 
 class WeatherService {
-  static const String apiKey = 'api'; // ĐIỀN API KEY CỦA BẠN VÀO ĐÂY
+  static const String apiKey = 'api';
 
-  // Hàm lấy vị trí hiện tại
-  // Lấy vị trí GPS
+
   Future<Position> getCurrentLocation() async {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) return Future.error('Dịch vụ vị trí bị tắt.');
@@ -30,7 +29,6 @@ class WeatherService {
     return 'Không rõ';
   }
 
-  // API 1: Lấy thời tiết HIỆN TẠI (kèm tham số lang=vi để lấy tiếng Việt)
   Future<Map<String, dynamic>> getCurrentWeather(double lat, double lon) async {
     final String url = 'https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&appid=$apiKey&units=metric&lang=vi';
     final response = await http.get(Uri.parse(url));
@@ -42,14 +40,13 @@ class WeatherService {
     }
   }
 
-  // API 2: Lấy dự báo thời tiết THEO GIỜ (Bản free là mỗi 3 giờ/lần)
   Future<List<dynamic>> getHourlyForecast(double lat, double lon) async {
     final String url = 'https://api.openweathermap.org/data/2.5/forecast?lat=$lat&lon=$lon&appid=$apiKey&units=metric&lang=vi';
     final response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
-      return data['list']; // Trả về mảng danh sách dự báo
+      return data['list']; 
     } else {
       throw Exception('Không thể tải dự báo theo giờ');
     }
